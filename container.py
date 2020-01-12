@@ -1,3 +1,4 @@
+import docker.errors
 from texttable import Texttable
 
 def list_container(self, params):
@@ -20,9 +21,18 @@ def list_container(self, params):
     print(containerList.draw())
 
 def stop_container(self, container_id):
-    container = self.client.containers.get(container_id)
-    container.stop()
+    try:
+        container = self.client.containers.get(container_id)
+        container.stop()
+    except Exception as e:
+        print(e)
 
 def start_container(self, container_id):
-    container = self.client.containers.get(container_id)
-    container.start()
+    try:
+        container = self.client.containers.get(container_id)
+        container.start()
+    except docker.errors.NotFound:
+        print("Container not found")
+    except Exception as e:
+        print(e)
+
