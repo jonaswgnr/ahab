@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from cmd import Cmd
 import docker
 import container
