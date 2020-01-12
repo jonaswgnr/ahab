@@ -24,6 +24,8 @@ def stop_container(self, container_id):
     try:
         container = self.client.containers.get(container_id)
         container.stop()
+    except docker.errors.NotFound:
+        print("Container not found")
     except Exception as e:
         print(e)
 
@@ -36,3 +38,11 @@ def start_container(self, container_id):
     except Exception as e:
         print(e)
 
+def remove_container(self, container_id):
+    try:
+        container = self.client.containers.get(container_id)
+        container.remove()
+    except docker.errors.NotFound:
+        print("Container not found")
+    except Exception as e:
+        print(e)

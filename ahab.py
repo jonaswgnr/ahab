@@ -30,6 +30,12 @@ class ahab(Cmd):
     def do_start(self, inp):
         container.start_container(self, inp)
 
+    def do_rm(self, inp):
+        container.remove_container(self, inp)
+
+    def do_remove(self, inp):
+        container.remove_container(self, inp)
+
     pass
 
 cli = ahab()
