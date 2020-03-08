@@ -39,7 +39,6 @@ class ahab(Cmd):
         container.remove_container(self, inp)
 
     def do_pull(self, inp):
-        self.apiclient = docker.APIClient(base_url='unix://var/run/docker.sock')
         image.pull_image(self, inp)
 
     def do_image(self, inp):

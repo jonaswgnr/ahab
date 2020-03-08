@@ -1,6 +1,8 @@
+import docker
 from texttable import Texttable
 
 def pull_image(self, inp):
+    self.apiclient = docker.APIClient(base_url='unix://var/run/docker.sock')
     image = inp.split(':')[0]
     try:
         tag = inp.split(':')[1]
