@@ -3,6 +3,8 @@
 from cmd import Cmd
 import docker
 import container
+import image
+
 
 class ahab(Cmd):
     prompt = "Ahab> "
@@ -36,6 +38,17 @@ class ahab(Cmd):
     def do_remove(self, inp):
         container.remove_container(self, inp)
 
+    def do_pull(self, inp):
+        self.apiclient = docker.APIClient(base_url='unix://var/run/docker.sock')
+        image.pull_image(self, inp)
+
+    def do_image(self, inp):
+        command = inp.split()[0]
+        params = inp.split()[1:]
+        if command in ["ls","list"]:
+            image.list_images(self, params)
+        if command in ["rm","remove"]:
+            image.remove_image(self, params[0])
     pass
 
 cli = ahab()
