@@ -16,7 +16,10 @@ def pull_image(self, inp):
 
 def remove_image(self, name):
     print("Removing: " + name)
-    self.client.images.remove(name)
+    try:
+        self.client.images.remove(name)
+    except docker.errors.ImageNotFound:
+        print("Image not found")
 
 def list_images(self, params):
     if "a" in params:
